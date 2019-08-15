@@ -6,5 +6,3 @@ export default {
   name: 'TabPanel',
 }
 </script>
-
-<style></style>

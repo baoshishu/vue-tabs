@@ -3,7 +3,6 @@ import resolve from 'rollup-plugin-node-resolve'
 import vue from 'rollup-plugin-vue'
 import cjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
-import postcss from 'rollup-plugin-postcss'
 
 const config = require('../package.json')
 
@@ -13,10 +12,7 @@ export default {
     resolve({
       mainFields: ['module', 'jsnext:main', 'main', 'browser'],
     }),
-    vue({
-      css: true,
-      compileTemplate: true, // Explicitly convert template to render function
-    }),
+    vue({}),
     babel({
       exclude: 'node_modules/**',
     }),
@@ -26,6 +22,5 @@ export default {
     replace({
       VERSION: JSON.stringify(config.version),
     }),
-    postcss(),
   ],
 }
