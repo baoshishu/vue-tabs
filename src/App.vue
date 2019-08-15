@@ -1,44 +1,54 @@
 <template>
   <div id="app">
-    <Editor v-model="data" :image-provider="imageProvider" />
-    <pre>{{ data }}</pre>
+    <Tabs :default-index="0" @tab-change="changeTab" active-class="bg-blue-500">
+      <TabList style="display:flex;" class="flex justify-between w-64">
+        <Tab class="text-red-500">tab1</Tab>
+        <Tab>tab2</Tab>
+        <Tab>tab3</Tab>
+        <Tab style="color:cyan">tab4</Tab>
+      </TabList>
+      <TabPanels :class="'bg-blue-500'">
+        <TabPanel :class="'text-red-500'">panel1 </TabPanel>
+        <TabPanel>panel2 </TabPanel>
+        <TabPanel>panel3 </TabPanel>
+        <TabPanel>panel4 </TabPanel>
+      </TabPanels>
+    </Tabs>
   </div>
 </template>
 
 <script>
-import Editor from '@/index.js'
-// import Editor from '../dist/vue-editor.umd'
+import { Tabs, TabList, TabPanel, Tab, TabPanels } from '@/index.js'
+// import { Tabs, TabList, TabPanel, Tab, TabPanels } from '../dist/vue-tabs.umd'
 
 export default {
+  name: 'app',
   data() {
     return {
-      data:
-        '<p><video controls><source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"></video></p>',
-      imageProvider: {
-        name: 'qiniu',
-        token:
-          '-qWchT63mkZEJch0ygm3bN9h3peInHqCcSAEMtvV:0PSey7kMtMFbU84mrM4WYeVzfgA=:eyJzY29wZSI6InRlc3QiLCJkZWFkbGluZSI6MTU2NTY4OTM3MH0=',
-        domain: 'cdn-testing.zanquan.net',
-      },
+      activeIndex: 0,
+      bgRed: 'background:red;',
     }
   },
-  name: 'app',
+  methods: {
+    changeTab(i) {
+      this.activeIndex = i
+    },
+  },
   components: {
-    Editor,
+    Tabs,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tab,
   },
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '\5FAE\8F6F\96C5\9ED1', Arial, sans-serif;
-  color: #2c3e50;
-  margin-top: 60px;
-  margin-left: 300px;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
 }
 </style>
